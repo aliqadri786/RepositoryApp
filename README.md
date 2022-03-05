@@ -1,24 +1,19 @@
 # README
+This is a simple Repository App.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Rails version used in this app is rails-7
+and Ruby version used is ruby-3.0.0
 
-Things you may want to cover:
+ways to run this project
 
-* Ruby version
+* cd RepositoryApp
 
-* System dependencies
+* run command "bundle install" to install all packages listed in Gemfile
 
-* Configuration
+* run command "rails db:create" to ceate database i have used "PostgreSQL" database
 
-* Database creation
+* run command "rails db:migrate" to migrate db to latest version
 
-* Database initialization
+* run command "rails s" to run the project 
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* THANK YOU
