@@ -3,7 +3,13 @@ class RepositoriesController < ApplicationController
 
   # GET /repositories or /repositories.json
   def index
-    @repositories = Repository.all
+    if params[:keyword]
+      @repositories = Repository.includes(:user).search(params[:keyword])
+
+    else
+      @repositories = Repository.includes(:user).all
+    end
+    @keyword = params[:keyword]
   end
 
   # GET /repositories/1 or /repositories/1.json

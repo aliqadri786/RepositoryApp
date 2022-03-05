@@ -1,0 +1,4 @@
+.repositories_list{
+    display: flex;
+    border:1px solid red;
+}

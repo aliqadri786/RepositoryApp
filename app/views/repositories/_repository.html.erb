@@ -1,17 +1,26 @@
-<div id="<%= dom_id repository %>">
+<div id="<%= dom_id repository %>" class="repositories_list">
   <p>
-    <strong>Name:</strong>
-    <%= repository.name %>
+    <strong>Repository Name:</strong>
+    <%= link_to repository.name, repository %>
   </p>
 
   <p>
-    <strong>Description:</strong>
-    <%= repository.description %>
-  </p>
-
-  <p>
-    <strong>User:</strong>
-    <%= repository.user_id %>
+    <strong>Owner Name:</strong>
+    <%= repository.user.full_name %>
   </p>
 
 </div>
+
+<% if params[:id].present? %>
+  <br/><br/>
+  <strong>Description:</strong>
+  <div><%= repository.description%></div>
+
+  <br/><br/>
+  <h3>Users:</h3>
+  <% repository.users.each do |user| %>
+    <%= render user %>
+    <hr/>
+  <% end %>
+<% end %>
+

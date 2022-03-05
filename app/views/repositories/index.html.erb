@@ -2,6 +2,11 @@
 
 <h1>Repositories</h1>
 
+<%= form_with url: root_path, method: :get, local: true do |f| %>
+  <%= f.text_field :keyword, value: @keyword %>
+  <%= f.submit "Search" %>
+<% end %>
+
 <div id="repositories">
   <% @repositories.each do |repository| %>
     <%= render repository %>
