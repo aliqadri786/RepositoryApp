@@ -13,5 +13,8 @@
     <strong>Email:</strong>
     <%= user.email %>
   </p>
+  <% if show_remove == :true%>
+    <%= button_to "Remove", remove_user_repository_path(params[:id],user.id), form: { data: { turbo_confirm: "Are you sure?" } }, method: :delete %>
+  <% end %>
 
 </div>

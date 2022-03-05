@@ -1,5 +1,5 @@
 class RepositoriesController < ApplicationController
-  before_action :set_repository, only: %i[ show edit update destroy ]
+  before_action :set_repository, only: %i[ show edit update destroy remove_user add_user ]
 
   # GET /repositories or /repositories.json
   def index
@@ -10,10 +10,12 @@ class RepositoriesController < ApplicationController
       @repositories = Repository.includes(:user).all
     end
     @keyword = params[:keyword]
+   
   end
 
   # GET /repositories/1 or /repositories/1.json
   def show
+    @remaining_users = User.where.not(id: @repository.users.ids)
   end
 
   # GET /repositories/new
@@ -61,6 +63,25 @@ class RepositoriesController < ApplicationController
       format.html { redirect_to repositories_url, notice: "Repository was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def remove_user
+    @repository.users.destroy(params[:user_id])
+
+    respond_to do |format|
+      format.html { redirect_to @repository, notice: "User was successfully removed." }
+      format.json { head :no_content }
+    end
+  end
+
+  def add_user
+    @repository.users.push(User.find params[:user_id])
+    if @repository.save
+      respond_to do |format|
+        format.html { redirect_to @repository, notice: "User was successfully added." }
+        format.json { head :no_content }
+      end
+  end
   end
 
   private

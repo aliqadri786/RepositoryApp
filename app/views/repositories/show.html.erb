@@ -1,10 +1,27 @@
-<p style="color: green"><%= notice %></p>
+<div style="display:flex;width:100%">
+  <div style="width:60%">
+    <p style="color: green"><%= notice %></p>
 
-<%= render @repository %>
+    <%= render @repository %>
+    
+    <div>
+      <%= link_to "Edit this repository", edit_repository_path(@repository) %> |
+      <%= link_to "Back to repositories", repositories_path %>
+    
+      <%= button_to "Destroy this repository", @repository, method: :delete %>
+    </div>
+  </div>
 
-<div>
-  <%= link_to "Edit this repository", edit_repository_path(@repository) %> |
-  <%= link_to "Back to repositories", repositories_path %>
+  <div style="width:40%">
+    <% if @remaining_users.present? %>
+      <h2> Add user to repository</h2>
 
-  <%= button_to "Destroy this repository", @repository, method: :delete %>
+      <%= form_with(url: add_user_repository_path(@repository.id)) do |form| %>
+        <%= form.collection_select :user_id, @remaining_users.order(:first_name),:id,:full_name, include_blank: false %>
+        <%= form.submit "Add To Repository"%>
+      <% end %>
+    <% else %>
+        <h2>No more users to add.</h2>
+    <% end %>
+  </div>
 </div>

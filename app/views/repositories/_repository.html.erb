@@ -1,4 +1,4 @@
-<div id="<%= dom_id repository %>" class="repositories_list">
+<div id="<%= dom_id repository %>" class="">
   <p>
     <strong>Repository Name:</strong>
     <%= link_to repository.name, repository %>
@@ -12,14 +12,14 @@
 </div>
 
 <% if params[:id].present? %>
-  <br/><br/>
+  <br/>
   <strong>Description:</strong>
   <div><%= repository.description%></div>
 
-  <br/><br/>
-  <h3>Users:</h3>
+  <br/>
+  <h3>Users in this repository:</h3>
   <% repository.users.each do |user| %>
-    <%= render user %>
+    <%= render user, show_remove: :true%>
     <hr/>
   <% end %>
 <% end %>
